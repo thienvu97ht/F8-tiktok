@@ -24,6 +24,21 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'Tiếng Việt',
+        children: {
+            title: 'Ngôn ngữ',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'Tiếng Anh',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -44,6 +59,17 @@ function Header() {
             setSearchResult([1, 2]);
         }, 0);
     }, []);
+
+    // Handel logic
+    const handelMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                // Handle change language
+                break;
+            default:
+        }
+        console.log('🏆 ~ handelMenuChange ~ menuItem', menuItem);
+    };
 
     return (
         <header className={cx('wrapper')}>
@@ -80,7 +106,7 @@ function Header() {
                     <Button text>Tải lên</Button>
                     <Button primary>Đăng nhập</Button>
 
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handelMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
