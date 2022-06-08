@@ -1,16 +1,40 @@
-import { faCircleXmark, faMagnifyingGlass, faSignIn, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleQuestion,
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faKeyboard,
+    faMagnifyingGlass,
+    faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
-
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import styles from './Header.module.scss';
 import Button from '~/components/Button';
+import { Wrapper as PopperWrapper } from '~/components/Popper';
+import Menu from '~/components/Popper/Menu';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
+
+const MENU_ITEMS = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia} />,
+        title: 'Tiếng Việt',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCircleQuestion} />,
+        title: 'Phản hồi và trợ giúp',
+        to: '/feedback',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faKeyboard} />,
+        title: 'Phím tắt trên bàn phím',
+    },
+];
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
@@ -55,6 +79,12 @@ function Header() {
                 <div className={cx('actions')}>
                     <Button text>Tải lên</Button>
                     <Button primary>Đăng nhập</Button>
+
+                    <Menu items={MENU_ITEMS}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>
