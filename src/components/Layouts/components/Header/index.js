@@ -1,7 +1,6 @@
 import {
     faCircleQuestion,
     faCircleXmark,
-    faCloudUpload,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
@@ -16,11 +15,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
+import { UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import Menu from '~/components/Popper/Menu';
 import styles from './Header.module.scss';
@@ -61,23 +62,23 @@ const MENU_ITEMS = [
 const userMenu = [
     {
         icon: <FontAwesomeIcon icon={faUser} />,
-        title: 'View profile',
+        title: 'Xem hồ sơ',
         to: '/@hoaa',
     },
     {
         icon: <FontAwesomeIcon icon={faCoins} />,
-        title: 'Get coins',
+        title: 'Nhận xu',
         to: '/coin',
     },
     {
         icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Settings',
+        title: 'Cài đặt',
         to: '/settings',
     },
     ...MENU_ITEMS,
     {
         icon: <FontAwesomeIcon icon={faSignOut} />,
-        title: 'Log out',
+        title: 'Đăng xuất',
         to: '/logout',
         separate: true,
     },
@@ -110,7 +111,7 @@ function Header() {
                 <img src={images.logo} alt="Tiktok" />
                 <HeadlessTippy
                     interactive
-                    visible={searchResult.length > 0}
+                    // visible={searchResult.length > 0}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PopperWrapper>
@@ -139,7 +140,7 @@ function Header() {
                     {currentUser ? (
                         <Tippy delay={[0, 200]} content="Upload Video" placement="bottom">
                             <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faCloudUpload} />
+                                <UploadIcon />
                             </button>
                         </Tippy>
                     ) : (
@@ -151,10 +152,11 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handelMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/41dfc286b7c5ab1f7a7e7f39e764bf0d~c5_100x100.jpeg?x-expires=1655395200&x-signature=aUZCh6rgLrRsfniISKhHnHJU3xw%3D"
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/41dfc286b7c5ab1f7a7e7f39e764bf0d~c5_100x100.jpeg?x-expires=1655395200&x-signature=aUZCh6rgLrRsfniISKhHnHJU3xw%3"
                                 alt="Nguyen Van A"
+                                // fallback="https://static.fullstack.edu.vn/static/media/f8-icon.7ad2b161d5e80c87e516.png"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
